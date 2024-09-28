@@ -3,11 +3,6 @@ const display = document.createElement('div')
 const displayText = document.createElement('p')
 const rowContainer = document.createElement('div')
 
-container.appendChild(rowContainer)
-container.appendChild(rowContainer)
-container.appendChild(rowContainer)
-container.appendChild(rowContainer)
-container.appendChild(rowContainer)
 
 
 
