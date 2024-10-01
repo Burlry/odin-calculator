@@ -1,15 +1,30 @@
-#container {
+.container {
     display: flex;
-    flex-wrap: wrap;
-    height: 400px;
+    flex-flow: row wrap;
+    height: 454px;
     width: 300px;
     background-color: aqua;
-    justify-content: center;
+    justify-content: space-between;
 }
 
-#display {
+.output {
     display: flex;
     border: 2px solid black;
-    height: 30px;
-    margin: 20px 20px 20px 20px;
+    height: 71px;
+    width: 296px;
+    margin: 2px 2px 2px 2px;
+    font-size: 40px;
+    font-family: 'Courier New', Courier, monospace;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.button {
+    height: 71px;
+    width: 71px;
+    margin: 2px 2px 2px 2px;
+}
+
+#zeroButton {
+    width: 144px;
 }

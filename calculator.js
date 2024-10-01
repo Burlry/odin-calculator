@@ -1,10 +1,8 @@
 const container = document.querySelector('#container')
 const display = document.createElement('div')
 const displayText = document.createElement('p')
-const rowContainer = document.createElement('div')
 
 
-test
 
 
 
