@@ -1,5 +1,5 @@
-const container = document.querySelector('#container');
-const display = document.querySelector('#display');
+const container = document.querySelector('.container');
+const display = document.querySelector('.display');
 
 const add = function(a,b) {
     return a + b;
@@ -19,11 +19,14 @@ const divide = function(a,b) {
 
 const remainder = function(a,b) {
     return a % b;
-}
+};
 
 let num1;
 let num2;
 let operand;
+
+let operandLast = false;
+let operateReady = false;
 
 const operate = function(a,b,operator) {
     if (operator === '+') {
@@ -36,37 +39,68 @@ const operate = function(a,b,operator) {
         return divide(a,b)
     } else if (operator === '%') {
         return remainder(a,b)
-    } else {
-        return "ERROR";
     };
 };
 
 let buttons = document.querySelectorAll(".button");
+console.log(buttons);
 buttons.forEach((button) => {
     button.onclick = () => {
-        if (button.textContent == 0 || 1 || 2 || 3 || 4 || 5 || 6 || 7 || 8 || 9) {
-            numberPress()
+        if ("1234567890".includes(button.textContent)) {
+            numberPress(button);
         } else if (button.textContent == "%" || "/" || "*" || "-" || "+") {
-            operandPress()
-        }
+            operandPress(button);
+        } else if (button.textContent == "+/-") {
+            negativePress();
+        } else if (button.textContent == "AC") {
+            clearPress();
+        } else if (button.textContent == ".") {
+            decimalPress();
+        } else if (button.textContent == "=") {
+            equalsPress();
+        };
     };
 });
 
-const numberPress = function() {
-    if (operandLast = false) {
-        if (display.textContent === 0) {
-            button.textContent = display.textContent;
+const numberPress = function(button) {
+    if (operandLast === false) {
+        if (display.textContent === "0") {
+            display.textContent = button.textContent;
         } else {
-            button.textContent = display.textContent + button.textContent
+            display.textContent += button.textContent;
         }
     } else {
-
+        num1 = display.textContent;
+        operandLast = false;
+        
     }
 };
 
-const operandPress = function() {
-    operand = button.textContent
+const operandPress = function(button) {
+    num1 = display.textContent;
+    operand = button.textContent;
     operandLast = true;
-}
+};
 
-let operandLast = false;
+const negativePress = function() {
+    let tempNegative = display.textContent;
+    tempNegative *= -Number(tempNegative);
+    display.textContent = tempNegative;
+};
+
+const clearPress = function() {
+    display.textContent = "0";
+    num1 = undefined;
+    num2 = undefined;
+    operand = undefined;
+    operandLast = false;
+    operateReady = false;
+};
+
+const decimalPress = function() {
+
+};
+
+const equalsPress = function() {
+
+}
