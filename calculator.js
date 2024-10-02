@@ -43,12 +43,11 @@ const operate = function(a,b,operator) {
 };
 
 let buttons = document.querySelectorAll(".button");
-console.log(buttons);
 buttons.forEach((button) => {
     button.onclick = () => {
         if ("1234567890".includes(button.textContent)) {
             numberPress(button);
-        } else if (button.textContent == "%" || "/" || "*" || "-" || "+") {
+        } else if ("%/*-+".includes(button.textContent)) {
             operandPress(button);
         } else if (button.textContent == "+/-") {
             negativePress();
