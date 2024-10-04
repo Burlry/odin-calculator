@@ -2,7 +2,7 @@ const container = document.querySelector('.container');
 const display = document.querySelector('.display');
 
 const add = function(a,b) {
-    return a + b;
+    return Number(a) + Number(b);
 };
 
 const subtract = function(a,b) {
@@ -14,8 +14,13 @@ const multiply = function(a,b) {
 };
 
 const divide = function(a,b) {
-    return a / b;
-};
+    if (b === 0) {
+        return "No";
+    } else {
+    return (a / b).toFixed(8);
+}};
+
+console.log(divide(2,0))
 
 const remainder = function(a,b) {
     return a % b;
@@ -43,6 +48,7 @@ const operate = function(a,b,operator) {
 };
 
 let buttons = document.querySelectorAll(".button");
+
 buttons.forEach((button) => {
     button.onclick = () => {
         if ("1234567890".includes(button.textContent)) {
@@ -62,6 +68,7 @@ buttons.forEach((button) => {
 });
 
 const numberPress = function(button) {
+    if (display.textContent.length < 11) 
     if (operandLast === false) {
         if (display.textContent === "0") {
             display.textContent = button.textContent;
@@ -71,11 +78,14 @@ const numberPress = function(button) {
     } else {
         num1 = display.textContent;
         operandLast = false;
-        
+        display.textContent = button.textContent;
     }
 };
 
 const operandPress = function(button) {
+    if (operateReady === true) {
+        equalsPress();
+    }
     num1 = display.textContent;
     operand = button.textContent;
     operandLast = true;
@@ -97,9 +107,17 @@ const clearPress = function() {
 };
 
 const decimalPress = function() {
-
+    if (display.textContent.includes(".")) {
+        return;
+    } else {
+        display.textContent += ".";
+    }
 };
 
 const equalsPress = function() {
-
+    num2 = display.textContent;
+    display.textContent = operate(num1,num2,operand);
+    num1 = display.textContent;
+    operand = undefined;
+    num2 = undefined;
 }
