@@ -3,7 +3,7 @@
     flex-flow: row wrap;
     height: 454px;
     width: 300px;
-    background-color: aqua;
+    background-color:rgb(168, 168, 166);
     justify-content: space-between;
 }
 
@@ -23,6 +23,7 @@
     height: 71px;
     width: 71px;
     margin: 2px 2px 2px 2px;
+    background-color: dodgerblue;
 }
 
 #zeroButton {
