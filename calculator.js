@@ -17,10 +17,8 @@ const divide = function(a,b) {
     if (b === 0) {
         return "No";
     } else {
-    return (a / b).toFixed(8);
+    return Number((a / b).toFixed(10));
 }};
-
-console.log(divide(2,0))
 
 const remainder = function(a,b) {
     return a % b;
@@ -32,6 +30,7 @@ let operand;
 
 let operandLast = false;
 let operateReady = false;
+let equalsLast = false;
 
 const operate = function(a,b,operator) {
     if (operator === '+') {
@@ -53,22 +52,30 @@ buttons.forEach((button) => {
     button.onclick = () => {
         if ("1234567890".includes(button.textContent)) {
             numberPress(button);
+            equalsLast = false;
         } else if ("%/*-+".includes(button.textContent)) {
             operandPress(button);
+            equalsLast = false;
         } else if (button.textContent == "+/-") {
             negativePress();
+            equalsLast = false;
         } else if (button.textContent == "AC") {
             clearPress();
         } else if (button.textContent == ".") {
             decimalPress();
+            equalsLast = false;
         } else if (button.textContent == "=") {
             equalsPress();
+            equalsLast = true;
         };
     };
 });
 
 const numberPress = function(button) {
-    if (display.textContent.length < 11) 
+    if (equalsLast === true) {
+        display.textContent = ""
+    }
+    if (display.textContent.length < 11) {
     if (operandLast === false) {
         if (display.textContent === "0") {
             display.textContent = button.textContent;
@@ -79,7 +86,7 @@ const numberPress = function(button) {
         num1 = display.textContent;
         operandLast = false;
         display.textContent = button.textContent;
-    }
+    }}
 };
 
 const operandPress = function(button) {
@@ -89,6 +96,7 @@ const operandPress = function(button) {
     num1 = display.textContent;
     operand = button.textContent;
     operandLast = true;
+    operateReady = true;
 };
 
 const negativePress = function() {
@@ -115,9 +123,14 @@ const decimalPress = function() {
 };
 
 const equalsPress = function() {
+    if (operateReady === true) {
     num2 = display.textContent;
     display.textContent = operate(num1,num2,operand);
     num1 = display.textContent;
     operand = undefined;
     num2 = undefined;
-}
+    operateReady = false;
+    } else if (operateReady === false) {
+        display.textContent = "ERROR"
+    };
+};
